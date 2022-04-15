@@ -8,8 +8,10 @@ class CrytoServices {
 
     async getCoins() {
         const response = await getCrypto()
-        return response.data.filter((coins) => coins.type === 'pool').map((coins) => {
-           return coins.reward_unit
+        return response.data
+            .filter((coins) => coins.type === 'pool')
+            .map((coins) => {
+                return coins.reward_unit
         })
             .filter((v, i, a) => a.indexOf(v) === i)
     }
@@ -23,9 +25,14 @@ class CrytoServices {
         const response = await this.getAllWithReward()
         //if it's not filtered, it returns all the results sorted
         if (!rewardName) {
-            return response.sort(this.compareByReward)
+            return response
+                .filter((coins) => coins.type === 'pool')
+                .sort(this.compareByReward)
         }
-        return response.filter((coin) => coin.reward_unit === rewardName).sort(this.compareByReward)
+        return response
+            .filter((coin) => coin.reward_unit === rewardName)
+            .filter((coins) => coins.type === 'pool')
+            .sort(this.compareByReward)
     }
 
     //sort greater rewards first

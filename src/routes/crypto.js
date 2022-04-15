@@ -9,7 +9,7 @@ app.route('')
 
 //
 app.route('/best-pools')
-    .get(CryptoController.getCoins)
+    .get(CryptoController.getBestRewardFromCoin)
 
 
 

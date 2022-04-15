@@ -6,7 +6,7 @@ class CryptoController {
         return res.json(data)
     }
 
-    async getCoins(req, res) {
+    async getBestRewardFromCoin(req, res) {
         const { coin } = req.query
         const data = await CrytoServices.getBestRewardFromCoin(coin)
         return res.json(data)
