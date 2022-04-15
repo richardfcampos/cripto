@@ -1,11 +1,13 @@
 const { getCrypto } = require('../api/cryptoApi')
-class CrytoServices {
+class CryptoServices {
 
+    //getting all data that has rewards
     async getAllWithReward() {
         const response = await getCrypto()
         return response.data.filter((coins) => coins.reward > 0 )
     }
 
+    //getting only coins with pool type
     async getCoins() {
         const response = await getCrypto()
         return response.data
@@ -16,6 +18,7 @@ class CrytoServices {
             .filter((v, i, a) => a.indexOf(v) === i)
     }
 
+    //ordering best rewards that could be filtered by rewardUnits
     async getBestRewardFromCoin(rewardName) {
         const rewardUnit = await this.getCoins()
         //if it has rewardName, it checks if it exists, if not, empty array as a return
@@ -47,4 +50,4 @@ class CrytoServices {
     }
 }
 
-module.exports = new CrytoServices
+module.exports = new CryptoServices
